@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FXG Logo - 4 Design Variations</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 色定義 */
+        :root {
+            --tropical-ocean: #017580; /* 南国風オーシャンブルー (ハイライトカラー) */
+            --light-ocean: #6fb3bd;    /* Pattern3, 4用: 薄いオーシャンブルー */
+            --black: #000000;
+            --white: #827fbc;
+            --logo-font: 'Bodoni Moda', serif;
+            
+            /* ロゴ幅調整用変数 (デスクトップ向け初期値) */
+            --main-logo-size: 20vw; /* 4分割になったのでサイズを少し大きく */
+            --sub-text-size: calc(var(--main-logo-size) / 10);
+            --sub-letter-spacing: 0.11vw;
+            --main-margin-top: 0.5vw;
+            --fg-ratio: 0.65; /* FとGの縮小率 */
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2列 */
+            grid-template-rows: 1fr 1fr;    /* 2行 */
+            min-height: 100vh;
+            overflow: hidden; 
+            background-color: var(--black); /* 全体の背景を黒に統一 */
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative; 
+            min-height: 50vh; 
+            background-color: var(--black); /* 各セクションも黒背景 */
+        }
+
+        /* Pattern番号のスタイル */
+        .pattern-label {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 1.5vw;
+            font-family: sans-serif;
+            font-weight: bold;
+            color: var(--light-ocean); /* ラベルの色を明るめに */
+        }
+
+        /* ロゴコンポーネント */
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+        }
+
+        .main-logo, .sub-text {
+            font-family: var(--logo-font);
+            font-weight: 700;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+            white-space: nowrap;
+        }
+        
+        .main-logo {
+            font-size: var(--main-logo-size);
+            display: flex; 
+            align-items: center; /* FとGをXに対して中央に揃える */
+        }
+        
+        /* F, X, G の文字を個別に設定 */
+        .logo-char {
+            line-height: 1;
+        }
+        
+        /* FashionXglobal のスタイル */
+        .sub-text {
+            font-size: var(--sub-text-size);
+            letter-spacing: var(--sub-letter-spacing);
+            margin-top: var(--main-margin-top);
+            display: flex; 
+        }
+        
+        /* ==================== 共通の色クラス ==================== */
+        .color-tropical-ocean { color: var(--tropical-ocean); }
+        .color-light-ocean { color: var(--light-ocean); }
+        .color-white { color: var(--white); }
+
+        /* ==================== Pattern固有の調整 ==================== */
+        
+        /* Pattern 2 & 4: FとGを小さくするスタイル */
+        .small-char .main-logo {
+            /* F, X, G を分割した span に対してのみ適用 */
+            font-size: var(--main-logo-size); 
+        }
+        .small-char .fg-char { 
+            font-size: calc(var(--main-logo-size) * var(--fg-ratio)); 
+        }
+
+        /* ==================== レスポンシブ調整 ==================== */
+        @media (max-width: 768px) {
+            :root {
+                --main-logo-size: 35vw; /* 2x2グリッドなので大きく */
+                --sub-text-size: calc(var(--main-logo-size) / 8);
+                --sub-letter-spacing: 0.3vw;
+                --main-margin-top: 1.5vw;
+            }
+            body {
+                grid-template-columns: 1fr; /* モバイルでは1列 x 4行に再編成 */
+                grid-template-rows: repeat(4, 1fr);
+            }
+             .pattern-label { font-size: 3vw; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="logo-section p1">
+        <span class="pattern-label">Pattern 1</span>
+        <div class="logo-container">
+            <h1 class="main-logo">
+                <span class="logo-char color-white">F</span>
+                <span class="logo-char color-tropical-ocean">X</span>
+                <span class="logo-char color-white">G</span>
+            </h1>
+            <p class="sub-text color-white">fashion<span class="color-tropical-ocean">X</span>global</p>
+        </div>
+    </div>
+
+    <div class="logo-section p2 small-char">
+        <span class="pattern-label">Pattern 2</span>
+        <div class="logo-container">
+            <h1 class="main-logo">
+                <span class="logo-char fg-char color-white">F</span>
+                <span class="logo-char color-tropical-ocean">X</span>
+                <span class="logo-char fg-char color-white">G</span>
+            </h1>
+            <p class="sub-text color-white">fashion<span class="color-tropical-ocean">X</span>global</p>
+        </div>
+    </div>
+    
+    <div class="logo-section p3">
+        <span class="pattern-label">Pattern 3</span>
+        <div class="logo-container">
+            <h1 class="main-logo">
+                <span class="logo-char color-light-ocean">F</span>
+                <span class="logo-char color-tropical-ocean">X</span>
+                <span class="logo-char color-light-ocean">G</span>
+            </h1>
+            <p class="sub-text color-light-ocean">fashion<span class="color-tropical-ocean">X</span>global</p>
+        </div>
+    </div>
+    
+    <div class="logo-section p4 small-char">
+        <span class="pattern-label">Pattern 4</span>
+        <div class="logo-container">
+            <h1 class="main-logo">
+                <span class="logo-char fg-char color-light-ocean">F</span>
+                <span class="logo-char color-tropical-ocean">X</span>
+                <span class="logo-char fg-char color-light-ocean">G</span>
+            </h1>
+            <p class="sub-text color-light-ocean">fashion<span class="color-tropical-ocean">X</span>global</p>
+        </div>
+    </div>
+
+</body>
+</html>
